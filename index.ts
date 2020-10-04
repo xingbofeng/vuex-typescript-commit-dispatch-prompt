@@ -1,6 +1,6 @@
 type GetRestFuncType<T> = T extends (context: any, ...params: infer P) => infer R ? (...args: P) => R : never;
 
-type AddPrefix<Keys, Prefix = ''> = `${Prefix & string}${Prefix extends '' ? '' : '/'}${ Keys & string } `;
+type AddPrefix<Keys, Prefix = ''> = `${Prefix & string}${Prefix extends '' ? '' : '/'}${ Keys & string }`;
 
 type GetMutationsTypes<Module, ModuleName = ''> = Module extends { mutations: infer M } ? {
     [MutationKey in keyof M as AddPrefix<MutationKey, ModuleName>]: GetRestFuncType<M[MutationKey]>
