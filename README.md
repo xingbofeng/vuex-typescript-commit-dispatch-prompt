@@ -19,10 +19,8 @@ const vuexOptions = {
     actions,
     mutations,
     modules: {
+        home,
         detail,
-        report,
-        meeting,
-        scientificManage,
     },
     plugins: process.env.NODE_ENV === 'development' ? [createLogger()] : [],
 };
@@ -31,14 +29,20 @@ type Mutations = GetMutationsType<typeof vuexOptions>;
 
 type Actions = GetActionsType<typeof vuexOptions>;
 
+type GetParam<T extends (...args: any) => any> = T extends () => any ? undefined : T extends (arg: infer R) => any ? R : any;
+
 declare module 'vuex' {
     export interface Commit {
-        <T extends keyof Mutations>(type: T, payload?: Parameters<GetTypeOfKey<Mutations, T>>, options?: CommitOptions): ReturnType<GetTypeOfKey<Mutations, T>>;
+        <T extends keyof Mutations>(type: T, payload?: GetParam<GetTypeOfKey<Mutations, T>>, options?: CommitOptions): ReturnType<GetTypeOfKey<Mutations, T>>;
     }
     export interface Dispatch {
-        <T extends keyof Actions>(type: T, payload?: Parameters<GetTypeOfKey<Actions, T>>, options?: DispatchOptions): Promise<ReturnType<GetTypeOfKey<Actions, T>>>;
+        <T extends keyof Actions>(type: T, payload?: GetParam<GetTypeOfKey<Actions, T>>, options?: DispatchOptions): Promise<
+            ReturnType<GetTypeOfKey<Actions, T>>
+        >;
     }
 }
+
+const store = new Vuex.Store<RootState>(vuexOptions);
 ```
 
 ## Reading
