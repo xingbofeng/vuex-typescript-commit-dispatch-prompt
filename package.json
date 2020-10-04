@@ -1,0 +1,13 @@
+{
+    "name": "vuex-typescript-commit-dispatch-prompt",
+    "version": "1.0.1",
+    "description": "vuex typescript commit dispatch prompt",
+    "main": "index.ts",
+    "typings": "index.ts",
+    "scripts": {},
+    "author": "xingbofeng",
+    "license": "MIT",
+    "devDependencies": {
+        "typescript": "^4.1.0-beta"
+    }
+}
