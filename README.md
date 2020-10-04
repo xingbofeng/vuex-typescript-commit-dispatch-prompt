@@ -11,6 +11,8 @@ npm i vuex-typescript-commit-dispatch-prompt --save
 then modify your store.ts
 
 ```TypeScript
+import Vuex from 'vuex';
+import createLogger from 'vuex/dist/logger';
 import { GetActionsType, GetMutationsType, GetPayLoad, GetReturnType } from 'vuex-typescript-commit-dispatch-prompt';
 
 const vuexOptions = {
