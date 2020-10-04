@@ -11,7 +11,7 @@ npm i vuex-typescript-commit-dispatch-prompt --save
 then modify your store.ts
 
 ```TypeScript
-import { GetActionsType, GetMutationsType, GetTypeOfKey } from 'vuex-typescript-commit-dispatch-prompt';
+import { GetActionsType, GetMutationsType, GetPayLoad, GetReturnType } from 'vuex-typescript-commit-dispatch-prompt';
 
 const vuexOptions = {
     state,
@@ -29,16 +29,12 @@ type Mutations = GetMutationsType<typeof vuexOptions>;
 
 type Actions = GetActionsType<typeof vuexOptions>;
 
-type GetParam<T extends (...args: any) => any> = T extends () => any ? undefined : T extends (arg: infer R) => any ? R : any;
-
 declare module 'vuex' {
     export interface Commit {
-        <T extends keyof Mutations>(type: T, payload?: GetParam<GetTypeOfKey<Mutations, T>>, options?: CommitOptions): ReturnType<GetTypeOfKey<Mutations, T>>;
+        <T extends keyof Mutations>(type: T, payload?: GetPayLoad<Mutations, T>, options?: CommitOptions): GetReturnType<Mutations, T>;
     }
     export interface Dispatch {
-        <T extends keyof Actions>(type: T, payload?: GetParam<GetTypeOfKey<Actions, T>>, options?: DispatchOptions): Promise<
-            ReturnType<GetTypeOfKey<Actions, T>>
-        >;
+        <T extends keyof Actions>(type: T, payload?: GetPayLoad<Actions, T>, options?: DispatchOptions): Promise<GetReturnType<Actions, T>>;
     }
 }
 

@@ -1,6 +1,6 @@
 {
     "name": "vuex-typescript-commit-dispatch-prompt",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "vuex typescript commit dispatch prompt",
     "main": "index.ts",
     "typings": "index.ts",
