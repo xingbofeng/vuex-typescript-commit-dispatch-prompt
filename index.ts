@@ -41,3 +41,18 @@ export type GetActionsType<R> = UnionToIntersection<GetSubModuleActionsTypes<R> 
 export type GetPayLoad<T, K extends keyof T> = GetParam<GetTypeOfKey<T, K>>;
 
 export type GetReturnType<T, K extends keyof T> = ReturnType<GetTypeOfKey<T, K>>;
+
+/** state */
+type GetStateTypes<Module> = Module extends { state: () => infer R }
+  ? R
+  : Module extends { state: infer M }
+  ? {
+      [key in keyof M]: M[key]
+    }
+  : unknown
+export type GetModuleStateTypes<Module> = Module extends { modules: infer SubModules } ? GetModulesStateTypes<SubModules> : unknown
+export type GetModulesStateTypes<Modules> = {
+  [K in keyof Modules]: GetStateTypes<Modules[K]> & GetModuleStateTypes<Modules[K]>
+}
+
+export type GetStateType<T> = GetStateTypes<T> & GetModuleStateTypes<T>
