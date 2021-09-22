@@ -29,9 +29,9 @@ const vuexOptions = {
 
 type TstoreOptions = typeof vuexOptions
 
-type Mutations = GetMutationsType<typeof TstoreOptions>;
+type Mutations = GetMutationsType<TstoreOptions>;
 
-type Actions = GetActionsType<typeof TstoreOptions>;
+type Actions = GetActionsType<TstoreOptions>;
 
 type TState = GetStateType<TstoreOptions>
 
