@@ -27,13 +27,13 @@ const vuexOptions = {
     plugins: process.env.NODE_ENV === 'development' ? [createLogger()] : [],
 };
 
-type TstoreOptions = typeof vuexOptions
+type TStoreOptions = typeof vuexOptions
 
-type Mutations = GetMutationsType<TstoreOptions>;
+type Mutations = GetMutationsType<TStoreOptions>;
 
-type Actions = GetActionsType<TstoreOptions>;
+type Actions = GetActionsType<TStoreOptions>;
 
-type TState = GetStateType<TstoreOptions>
+type TState = GetStateType<TStoreOptions>
 
 export const key: InjectionKey<Store<TState>> = Symbol()
 
